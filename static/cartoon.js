@@ -6,7 +6,7 @@ let cartoonista = {
     },
     cartoonists: {},
     config: {  // The default config
-        excluded_cartoonists: [],  // exclude filter
+        excluded_cartoonists: ["martin_perscheid_de","xkcd_com","islieb_de","schoenescheisse_de","explosm_net","loadingartist_com","commitstrip_com","smbc_comics_com","jamesofnotrades_com"],  // exclude filter
     },
     get_cartoonists: async function () {
         let cartoonists = await fetch(this.api_base_url + this.api_endpoints.cartoonists);
