@@ -5,8 +5,8 @@ let cartoonista = {
         cartoon: "cartoon"
     },
     cartoonists: {},
-    config: {  // The default config
-        excluded_cartoonists: ["martin_perscheid_de","xkcd_com","islieb_de","schoenescheisse_de","explosm_net","loadingartist_com","commitstrip_com","smbc_comics_com","jamesofnotrades_com"],  // exclude filter
+    config: {  // The default config, can be overwrite with inits config parameter
+        excluded_cartoonists: [],  // exclude filter
     },
     get_cartoonists: async function () {
         let cartoonists = await fetch(this.api_base_url + this.api_endpoints.cartoonists);
@@ -24,7 +24,10 @@ let cartoonista = {
             });
         return cartoon.json();
     },
-    init: async function () {
+    init: async function (config) {
+        if (config !== undefined) {
+            this.config = config;
+        }
         await this.get_cartoonists().then(data => {
             this.cartoonists = data;
             if (typeof (Storage) !== "undefined") {
@@ -62,7 +65,9 @@ let cartoonista = {
             }
             if ('title' in data) {
                 document.getElementById("cartoonista_title").innerHTML = data.title;
-            } else { document.getElementById("cartoonista_title").innerHTML = ""; }
+            } else {
+                document.getElementById("cartoonista_title").innerHTML = "";
+            }
             cartoonista.resize_reset();
         })
     },
@@ -90,7 +95,8 @@ let cartoonista = {
 
         // prevent no selected cartoonists
         if (!t.checked && cartoonista.config.excluded_cartoonists.length === cartoonista.cartoonists.length - 1) {
-            t.checked = true; return;
+            t.checked = true;
+            return;
         }
 
         if (!t.checked && !cartoonista.config.excluded_cartoonists.includes(t.value)) {
@@ -128,4 +134,3 @@ let cartoonista = {
         img.style.cursor = 'zoom-in';
     }
 };
-cartoonista.init();

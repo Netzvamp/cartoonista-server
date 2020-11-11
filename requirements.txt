@@ -1,2 +1,2 @@
 flask
-cartoonista==0.5.1
+cartoonista

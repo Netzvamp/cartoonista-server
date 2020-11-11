@@ -1,3 +1,4 @@
+from os import environ
 from flask import Flask, render_template, jsonify, request
 import cartoonista
 
@@ -6,7 +7,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def root():
-    return render_template("cartoon.html")
+    exclude = ""
+    if "EXCLUDE" in environ:
+        exclude = "\"" + environ["EXCLUDE"].replace(",", "\",\"") + "\""
+    return render_template("cartoon.html", excluded_cartoonists=exclude)
 
 
 @app.route('/cartoonists')

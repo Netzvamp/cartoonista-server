@@ -1,0 +1,13 @@
+#
+# Setup of an cartoonista server
+#
+---
+version: "3.4"
+services:
+  cartoonista:
+    image: rlieback/cartoonista-server
+    ports:
+      - "5000:5000"
+    restart: always
+    # environment:
+      # EXCLUDE: martin_perscheid_de,xkcd_com,islieb_de,schoenescheisse_de,explosm_net,loadingartist_com,commitstrip_com,smbc_comics_com,jamesofnotrades_com
