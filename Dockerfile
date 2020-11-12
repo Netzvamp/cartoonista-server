@@ -3,7 +3,6 @@ MAINTAINER Robert Lieback <robertlieback@zetabyte.de>
 WORKDIR /srv
 COPY cartoonista-server /srv
 COPY requirements.txt /srv
-ENV OSTICKET_VERSION=1.14.3
 RUN pip install -r requirements.txt && \
     pip install gunicorn
 EXPOSE 5000
